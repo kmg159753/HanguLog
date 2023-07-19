@@ -1,5 +1,6 @@
 package com.example.hangusemiproject.auth.repository;
 
+
 import com.example.hangusemiproject.auth.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

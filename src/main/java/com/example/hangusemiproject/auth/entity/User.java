@@ -1,5 +1,6 @@
 package com.example.hangusemiproject.auth.entity;
 
+
 import com.example.hangusemiproject.auth.dto.SignupRequestDto;
 import com.example.hangusemiproject.desk.entity.Desk;
 import jakarta.persistence.*;

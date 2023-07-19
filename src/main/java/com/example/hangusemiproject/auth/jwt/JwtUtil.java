@@ -1,6 +1,5 @@
 package com.example.hangusemiproject.auth.jwt;
 
-
 import com.example.hangusemiproject.auth.entity.UserRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
