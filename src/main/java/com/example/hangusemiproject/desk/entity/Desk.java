@@ -1,5 +1,6 @@
 package com.example.hangusemiproject.desk.entity;
 
+import com.example.hangusemiproject.auth.entity.Timestamped;
 import com.example.hangusemiproject.auth.entity.User;
 import com.example.hangusemiproject.desk.dto.DeskRequestDto;
 import jakarta.persistence.*;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Desk {
+public class Desk extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

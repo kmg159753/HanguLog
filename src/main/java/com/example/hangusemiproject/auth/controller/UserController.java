@@ -27,16 +27,16 @@ public class UserController {
     private final UserService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, String>> signup(@Valid @RequestBody SignupRequestDto signupRequestDto, BindingResult result){
+    public ResponseEntity<Map<String, String>> signup(@Valid @RequestBody SignupRequestDto signupRequestDto){
         Map<String, String> response = new HashMap<>();
-        if(result.hasErrors()) {
-            String errorMsg = result.getFieldError().getDefaultMessage();
-
-            response.put("result", "fail");
-            response.put("msg", errorMsg);
-
-            return ResponseEntity.badRequest().body(response);
-        }
+//        if(result.hasErrors()) {
+//            String errorMsg = result.getFieldError().getDefaultMessage();
+//
+//            response.put("result", "fail");
+//            response.put("msg", errorMsg);
+//
+//            return ResponseEntity.badRequest().body(response);
+//        }
 
         String msg = authService.signup(signupRequestDto);
         log.info("msg : {}", msg);
