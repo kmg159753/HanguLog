@@ -1,6 +1,5 @@
 package com.example.hangusemiproject.desk.dto;
 
-
 import com.example.hangusemiproject.desk.entity.Desk;
 import lombok.Getter;
 

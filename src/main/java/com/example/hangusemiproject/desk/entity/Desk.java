@@ -1,6 +1,5 @@
 package com.example.hangusemiproject.desk.entity;
 
-
 import com.example.hangusemiproject.auth.entity.User;
 import com.example.hangusemiproject.desk.dto.DeskRequestDto;
 import jakarta.persistence.*;
@@ -32,7 +31,7 @@ public class Desk {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Desk(DeskRequestDto deskRequestDto,User user) {
+    public Desk(DeskRequestDto deskRequestDto, User user) {
         this.username = user.getName();
         this.profile = deskRequestDto.getProfile();
         this.deskImg = deskRequestDto.getDeskImg();

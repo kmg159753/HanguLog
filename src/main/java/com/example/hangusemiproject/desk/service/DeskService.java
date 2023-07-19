@@ -39,15 +39,27 @@ public class DeskService {
     }
 
     @Transactional
-    public String createDesk(DeskRequestDto deskRequestDto, User user) {
-       deskRepository.save( new Desk(deskRequestDto,user) );
+    public String createDesk(DeskRequestDto deskRequestDto, HttpServletRequest request) {
+
+        String tokenFromRequest = jwtUtil.getJwtFromHeader(request);
+        String userId = jwtUtil.getUserInfoFromToken(tokenFromRequest).getSubject();
+
+
+        User user = userRepository.findByUserId(userId).orElseThrow(() ->
+                new IllegalArgumentException("존재하지 않는 사람입니다.")
+        );
+
+        deskRepository.save( new Desk(deskRequestDto,user) );
         return "나만의 책상을 만들었습니다.";
     }
 
     @Transactional
-    public DeskDetailsResponseDto updateDesk(Long deskId, DeskRequestDto deskRequestDto, User user) {
+    public DeskDetailsResponseDto updateDesk(Long deskId, DeskRequestDto deskRequestDto, HttpServletRequest request) {
         Desk desk = findDesk(deskId);
-        if (!isDeskOwner(desk,user)){
+
+        User user = getUserFromRequest(request);
+
+        if (!isDeskOwner(desk, user)){
             throw new IllegalArgumentException("책상을 수정할 권한이 없습니다.");
         }
 
@@ -56,8 +68,9 @@ public class DeskService {
     }
 
     @Transactional
-    public String deleteDesk(Long deskId,User user) {
+    public String deleteDesk(Long deskId,HttpServletRequest request) {
         Desk desk = findDesk(deskId);
+        User user = getUserFromRequest(request);
         if (!isDeskOwner(desk,user)){
             throw new IllegalArgumentException("책상을 수정할 권한이 없습니다.");
         }
@@ -89,9 +102,16 @@ public class DeskService {
         );
     }
 
-    public boolean isDeskOwner(Desk desk, User user) {
-        return desk.getUser().getUserId().equals(user.getUserId());
+    private User getUserFromRequest(HttpServletRequest request) {
+        String tokenFromRequest = jwtUtil.getJwtFromHeader(request);
+        String userId = jwtUtil.getUserInfoFromToken(tokenFromRequest).getSubject();
+
+        return userRepository.findByUserId(userId).orElseThrow(() ->
+                new IllegalArgumentException("존재하지 않는 사람입니다.")
+        );
     }
 
-
+    private boolean isDeskOwner(Desk desk, User user) {
+        return desk.getUser().getUserId().equals(user.getUserId());
+    }
 }
