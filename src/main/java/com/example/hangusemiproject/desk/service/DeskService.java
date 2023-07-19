@@ -74,6 +74,7 @@ public class DeskService {
         if (!isDeskOwner(desk,user)){
             throw new IllegalArgumentException("책상을 수정할 권한이 없습니다.");
         }
+        user.removeDesk();
         deskRepository.delete(desk);
 
         return "삭제 되었습니다.";
