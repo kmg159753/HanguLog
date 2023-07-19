@@ -32,12 +32,12 @@ public class AwsS3Service {
         String tokenFromRequest = jwtUtil.getJwtFromHeader(httpServletRequest);
         String userId = jwtUtil.getUserInfoFromToken(tokenFromRequest).getSubject();
 
-        String key = randomFileName(multipartFile.getOriginalFilename(), userId);
-        String path = putS3(multipartFile.getInputStream(), key, multipartFile.getSize());
+        String fileName = randomFileName(multipartFile.getOriginalFilename(), userId);
+        String path = putS3(multipartFile.getInputStream(), fileName, multipartFile.getSize());
 
         return AwsS3
                 .builder()
-                .key(key)
+                .fileName(fileName)
                 .path(path)
                 .build();
     }

@@ -15,8 +15,8 @@ public class AwsS3 {
     }
 
     @Builder
-    public AwsS3(String key, String path) {
-        this.key = key;
+    public AwsS3(String fileName, String path) {
+        this.key = fileName;
         this.path = path;
     }
 }
