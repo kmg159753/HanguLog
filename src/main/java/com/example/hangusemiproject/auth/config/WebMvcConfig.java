@@ -16,7 +16,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "https://localhost:3000",
                         "http://localhost:3000",
-                        "https://flatland.shop" // 추가
+                        "http://flatland.shop" // 추가
                 )
                 .allowedMethods("*")
                 .allowCredentials(true)
