@@ -52,4 +52,15 @@ public class UserService {
         response.setHeader(AUTHORIZATION_HEADER, token);
         return token;
     }
+
+    public Boolean isIdMatch(String userId) {
+        Optional<User> checkUserId =  userRepository.findByUserId(userId);
+
+        if(checkUserId.isPresent()){
+            return false;
+        }
+
+        return true;
+
+    }
 }
