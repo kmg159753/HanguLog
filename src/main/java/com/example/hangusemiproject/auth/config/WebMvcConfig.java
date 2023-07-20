@@ -15,7 +15,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins(
                         "https://localhost:3000",
-                        "http://localhost:3000",
                         "https://flatland.shop" // 추가
                 )
                 .allowedMethods("*")
