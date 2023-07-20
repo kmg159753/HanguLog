@@ -31,6 +31,7 @@ public class DeskService {
 
     public DeskDetailsResponseDto getDesk(Long deskId) {
         Desk desk = findDesk(deskId);
+
         return new DeskDetailsResponseDto(desk);
     }
 
@@ -46,8 +47,14 @@ public class DeskService {
 
 
         User user = userRepository.findByUserId(userId).orElseThrow(() ->
-                new IllegalArgumentException("존재하지 않는 사람입니다.")
+                new IllegalArgumentException("항해원이 아닙니다.")
         );
+
+        if(deskRequestDto.getDescription().isEmpty()) {
+            throw new IllegalArgumentException("당신의 책상을 소개해주세요!");
+        }else if(deskRequestDto.getDeskImg().isEmpty()){
+            throw new IllegalArgumentException("당신의 책상을 보여주세요.");
+        }
 
         deskRepository.save( new Desk(deskRequestDto,user) );
         return "나만의 책상을 만들었습니다.";
@@ -60,7 +67,13 @@ public class DeskService {
         User user = getUserFromRequest(request);
 
         if (!isDeskOwner(desk, user)){
-            throw new IllegalArgumentException("책상을 수정할 권한이 없습니다.");
+            throw new IllegalArgumentException("당신의 책상이 이닙니다!!");
+        }
+
+        if(deskRequestDto.getDescription().isEmpty()) {
+            throw new IllegalArgumentException("당신의 책상을 소개해주세요!");
+        }else if(deskRequestDto.getDeskImg().isEmpty()){
+            throw new IllegalArgumentException("당신의 책상을 보여주세요.");
         }
 
         desk.update(deskRequestDto);
@@ -72,7 +85,7 @@ public class DeskService {
         Desk desk = findDesk(deskId);
         User user = getUserFromRequest(request);
         if (!isDeskOwner(desk,user)){
-            throw new IllegalArgumentException("책상을 수정할 권한이 없습니다.");
+            throw new IllegalArgumentException("당신의 책상이 이닙니다!!");
         }
         user.removeDesk();
         deskRepository.delete(desk);

@@ -18,6 +18,15 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler({NullPointerException.class})
+    public ResponseEntity<CustomException> nullPointerExceptionHandler(NullPointerException ex) {
+        CustomException customException = new CustomException("fail",ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(
+                customException,
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
     @ExceptionHandler({ MethodArgumentNotValidException.class})
     public ResponseEntity<CustomException> exceptionHandler(Exception ex) {
         String message = ex.getMessage();
@@ -32,5 +41,7 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+
+
 
 }
