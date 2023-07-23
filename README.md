@@ -1,7 +1,8 @@
 팀장 : 김민규 
 팀원 : 김민규 박서윤 
 
-BE Spring 박서윤 김민규
+BE Spring 박서윤, 김민규
+
 FE React 김태현
 
 
